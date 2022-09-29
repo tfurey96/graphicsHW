@@ -8,7 +8,7 @@ window.onload = function init() {
 
     gl = gl = canvas.getContext('webgl2');
     if ( !gl ) { alert( "WebGL 2.0 isn't available" ); }
-//draw circle
+//draw circle thing
    //center values
     var cX=0.5;
     var cY=0.5;
@@ -43,6 +43,16 @@ window.onload = function init() {
            cY+ r*Math.sin(i*2*Math.PI/100) 
        ));
    }
+
+   //trapezoid
+    vertices.push(vec2(-.6, 0.5));
+    vertices.push(vec2(0.0, 0.5));
+    vertices.push(vec2(-.2, .8));
+    vertices.push(vec2(-.4, 0.8));
+    colors.push(vec4(0.0, 0.0, 0.0 , 1.0))
+    colors.push(vec4(0.0, 1.0, 1.0 , 1.0))
+    colors.push(vec4(1.0, 0.0, 1.0 , 1.0))
+    colors.push(vec4(1.0, 1.0, 0.0 , 1.0))
 
      //  Configure WebGL
 
@@ -82,5 +92,6 @@ window.onload = function init() {
     function render() {
         gl.clear( gl.COLOR_BUFFER_BIT );
         gl.drawArrays( gl.TRIANGLE_FAN, 0, 102 );
+        gl.drawArrays( gl.TRIANGLE_FAN, 102, 4 );
       
     }
