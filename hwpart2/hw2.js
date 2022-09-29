@@ -10,74 +10,34 @@ window.onload = function init() {
     if ( !gl ) { alert( "WebGL 2.0 isn't available" ); }
 //draw circle
    //center values
-    var cX=.75;
-    var cY=.75;
+    var cX=0.0;
+    var cY=0.0;
 
     var colors = [ vec4( 0.0 , 0.0 , 0.0 , 1.0)]
     var vertices = [
           vec2(cX,cY),
           
     ];
-   
+    
+    var isDouble =false
     for (i = 0; i <= 100; i++){
-        colors.push(vec4((i)/100.0, 0.0, 0.0 , 1.0));
+        if (i%10<.5){
+            if(!isDouble){
+                r=r*2;
+                isDouble=true;
+            }
+            else{r=r/2;
+        isDouble=false}
+            
+        }
+           
+        colors.push(vec4(1.0, 0.0, 0.0 , 1.0));
         vertices.push(vec2(
            cX+ r*Math.cos(i*2*Math.PI/100),
            cY+ r*Math.sin(i*2*Math.PI/100) 
        ));
    }
-//draw elipse
-  //center values
-   var eX=-.75;
-   var eY=.75;
 
-
-   vertices.push(vec2(-.75, .75))
-   colors.push(vec4(1.0, 0.0, 0.0 , 1.0))
-   for (i = 0; i <= 100; i++){
-       colors.push(vec4(1.0, 0.0, 0.0 , 1.0));
-       vertices.push(vec2(
-          eX+ r*Math.cos(i*2*Math.PI/100),
-          eY+ 0.6*r*Math.sin(i*2*Math.PI/100) 
-      ));
-  }
-
-  //draw triangle
-  vertices.push(vec2(0.0 , 1.0))
-  vertices.push(vec2(0.3175 , .55))
-  vertices.push(vec2(-0.3175 , .55))
-  colors.push(vec4(1.0, 0.0, 0.0 , 1.0));
-  colors.push(vec4(0.0, 0.0, 1.0 , 1.0));
-  colors.push(vec4(0.0, 1.0, 0.0 , 1.0));
-
-  //draw squares
-   sX=0;
-   sY=-.2;
-   sR=.9
-   var white= vec4(1.0 , 1.0, 1.0, 1.0)
-   var black= vec4(0.0, 0.0, 0.0, 1.0)
-   var isWhite= true
-  while(sR>0){
-   if (isWhite){
-    colors.push(white)
-    colors.push(white)
-    colors.push(white)
-    colors.push(white)
-    isWhite=false
-   }
-   else{
-    colors.push(black)
-    colors.push(black)
-    colors.push(black)
-    colors.push(black)
-    isWhite=true
-   }
-   vertices.push(vec2(sX+sR*Math.sin(Math.PI/4), sY+sR*Math.cos(Math.PI/4)));
-   vertices.push(vec2(sX+sR*Math.sin(3*Math.PI/4), sY+sR*Math.cos(3*Math.PI/4)));
-   vertices.push(vec2(sX+sR*Math.sin(5*Math.PI/4), sY+sR*Math.cos(5*Math.PI/4)));
-   vertices.push(vec2(sX+sR*Math.sin(7*Math.PI/4), sY+sR*Math.cos(7*Math.PI/4)));
-   sR=sR-.15
-  }
      //  Configure WebGL
 
      gl.viewport( 0, 0, canvas.width, canvas.height );
@@ -115,13 +75,6 @@ window.onload = function init() {
     
     function render() {
         gl.clear( gl.COLOR_BUFFER_BIT );
-        gl.drawArrays( gl.TRIANGLE_FAN, 1, 101 );
-        gl.drawArrays( gl.TRIANGLE_FAN, 102, 102 );
-        gl.drawArrays(gl.TRIANGLES,204,3 );
-        gl.drawArrays(gl.TRIANGLE_FAN,207,4)
-        gl.drawArrays(gl.TRIANGLE_FAN,211,4)
-        gl.drawArrays(gl.TRIANGLE_FAN,215,4)
-        gl.drawArrays(gl.TRIANGLE_FAN,219,4)
-        gl.drawArrays(gl.TRIANGLE_FAN,223,4)
-        gl.drawArrays(gl.TRIANGLE_FAN,227,4)
+        gl.drawArrays( gl.TRIANGLE_FAN, 0, 102 );
+      
     }
