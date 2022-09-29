@@ -54,6 +54,25 @@ window.onload = function init() {
     colors.push(vec4(1.0, 0.0, 1.0 , 1.0))
     colors.push(vec4(1.0, 1.0, 0.0 , 1.0))
 
+    //spiral thing
+   var cX=.0;
+    var cY=.0;
+
+    colors.push(vec4( 1.0 , 0.0 , 0.0 , 1.0))
+   vertices.push(vec2(cX,cY));
+          r=.5;
+   
+   
+    for (i = 0; i <= 100; i++){
+        colors.push(vec4((i)/100.0, 1.0, 0.0 , 1.0));
+        vertices.push(vec2(
+           cX+ r*Math.cos(i*2*Math.PI/100),
+           cY+ r*Math.sin(i*2*Math.PI/100) 
+       )
+       );
+       r=r*.985;
+         } 
+
      //  Configure WebGL
 
      gl.viewport( 0, 0, canvas.width, canvas.height );
@@ -93,5 +112,6 @@ window.onload = function init() {
         gl.clear( gl.COLOR_BUFFER_BIT );
         gl.drawArrays( gl.TRIANGLE_FAN, 0, 102 );
         gl.drawArrays( gl.TRIANGLE_FAN, 102, 4 );
+        gl.drawArrays( gl.TRIANGLE_FAN, 106, 102 );
       
     }
