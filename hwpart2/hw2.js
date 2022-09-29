@@ -1,4 +1,4 @@
-var r= 0.2
+var r= 0.1
 var canvas;
 var gl;
 
@@ -10,8 +10,8 @@ window.onload = function init() {
     if ( !gl ) { alert( "WebGL 2.0 isn't available" ); }
 //draw circle
    //center values
-    var cX=0.0;
-    var cY=0.0;
+    var cX=0.5;
+    var cY=0.5;
 
     var colors = [ vec4( 0.0 , 0.0 , 0.0 , 1.0)]
     var vertices = [
@@ -25,13 +25,19 @@ window.onload = function init() {
             if(!isDouble){
                 r=r*2;
                 isDouble=true;
+               
             }
             else{r=r/2;
-        isDouble=false}
+        isDouble=false;
+        
+    }
             
         }
+        if(!isDouble){
+            colors.push(vec4(0.0, 0.0, 1.0 , 1.0));}
+            else{colors.push(vec4(0.0, 1.0, 0.0 , 1.0));}
            
-        colors.push(vec4(1.0, 0.0, 0.0 , 1.0));
+        
         vertices.push(vec2(
            cX+ r*Math.cos(i*2*Math.PI/100),
            cY+ r*Math.sin(i*2*Math.PI/100) 
